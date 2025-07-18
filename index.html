@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Profesional - Amir Hamzah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Final - Profesional & Estetik */
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --dark-color: #2c3e50;
+            --text-color: #34495e;
+            --light-text-color: #7f8c8d;
+            --bg-color: #f0f2f5;
+            --card-bg-color: #ffffff;
+            --border-color: #eef2f5;
+        }
+
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background-color: var(--card-bg-color);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-header, footer {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: aurora 15s ease infinite;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .main-header {
+            padding: 80px 40px;
+        }
+
+        .main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+        }
+
+        .main-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-top: 15px;
+        }
+
+        main {
+            padding: 50px 60px 70px 60px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 5px;
+            width: 60px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+        
+        h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        h3 { font-size: 1.7rem; }
+        h4 { font-size: 1.4rem; }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: #ffffff;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 20px rgba(143, 148, 251, 0.4);
+        }
+
+        .button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(143, 148, 251, 0.6);
+        }
+        .button:active {
+            transform: translateY(-1px) scale(1);
+        }
+        
+        .button-close {
+            background: transparent;
+            color: var(--light-text-color);
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button-close:hover {
+            background-color: var(--border-color);
+            color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .project-card {
+            background: var(--card-bg-color);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .project-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px auto;
+            color: var(--primary-color);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .project-card p {
+            flex-grow: 1;
+            color: var(--light-text-color);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        ul { list-style-type: none; padding-left: 0; }
+        li { margin-bottom: 12px; padding-left: 30px; position: relative; }
+        li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        ol li::before {
+             content: none; 
+        }
+
+        footer {
+            padding: 40px;
+            font-size: 0.9em;
+        }
+        
+        footer p { margin: 5px 0; opacity: 0.9; }
+
+        .project-page {
+            display: none;
+        }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background-color: #f8fafc; font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--dark-color); }
+        tbody tr:nth-child(even) { background-color: #f8fafc; }
+        tbody tr:last-child td { border-bottom: none; }
+        blockquote { border-left: 4px solid var(--primary-color); padding-left: 20px; margin: 25px 0; font-style: italic; font-size: 1.1rem; color: var(--light-text-color); }
+        .case-study-image { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        /* Responsif */
+        @media (max-width: 900px) { main { padding: 40px; } }
+        @media (max-width: 600px) { .portfolio-grid { grid-template-columns: 1fr; } .main-header h1 { font-size: 2.8rem; } h2 { font-size: 2.2rem; } main { padding: 30px 25px; } }
+    </style>
+</head>
+<body>
+    <div id="portfolio-page" class="container">
+        <header class="main-header">
+            <h1>Portofolio AMIR HAMZAH</h1>
+            <p>Mahasiswa Teknik Informatika, Universitas Pelita Bangsa</p>
+        </header>
+        <main>
+            <section class="section">
+                <h2>Proyek Saya</h2>
+                <div class="portfolio-grid">
+                    <div class="project-card">
+                        <h3>Perjalanan Rasulullah SAW</h3>
+                        <p>Kisah perjalanan hidup dan dakwah Nabi Muhammad SAW dari lahir hingga wafat, sebagai suri tauladan umat.</p>
+                        <button class="button" onclick="showPage('project1')">Lihat Proyek 1</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>Kajian Etika Bisnis Islami</h3>
+                        <p>Analisis mengenai praktik riba dalam bisnis modern dan solusinya menurut perspektif Islam.</p>
+                        <button class="button" onclick="showPage('project2')">Lihat Proyek 2</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>Pemasaran Islami</h3>
+                        <p>Kajian mengenai konsep, regulasi, tujuan, dan penerapan e-commerce dalam bisnis kontemporer Islami.</p>
+                        <button class="button" onclick="showPage('project3')">Lihat Proyek 3</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>Lembaga Keuangan Syariah</h3>
+                        <p>Artikel ringan tentang perbankan syariah dan perbedaannya yang mendasar dengan bank konvensional.</p>
+                        <button class="button" onclick="showPage('project4')">Lihat Proyek 4</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>Praktik Muamalah</h3>
+                        <p>Penjelasan praktis tentang penerapan akad jual beli, sewa, kemitraan, dan utang-piutang dalam kehidupan modern.</p>
+                        <button class="button" onclick="showPage('project5')">Lihat Proyek 5</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>AMIR HAMZAH | 312310324 | TI.23 CA.1</p>
+            <p>© 2025 Universitas Pelita Bangsa</p>
+        </footer>
+    </div>
+
+   <div id="project1" class="container project-page">
+        <main>
+            <button class="button button-close" onclick="showPage('portfolio-page')">← Kembali ke Portofolio</button>
+            <h2>Kisah Perjalanan Hidup Rasulullah SAW</h2>
+            <section class="section">
+                <h3>Fase Kehidupan Nabi Muhammad SAW</h3>
+                <p>Perjalanan hidup (sirah) Nabi Muhammad SAW adalah kisah agung yang penuh dengan teladan, perjuangan, dan rahmat bagi seluruh alam. Memahaminya adalah bagian penting dari keimanan seorang Muslim. Berikut adalah fase-fase penting dalam kehidupan beliau:</p>
+                
+                <h4>1. Kelahiran dan Masa Muda (570 - 610 M)</h4>
+                <p>Nabi Muhammad SAW lahir di Mekah pada Tahun Gajah (570 M) dari kabilah Bani Hasyim yang terhormat. Beliau lahir dalam keadaan yatim, karena ayahnya, Abdullah, wafat sebelum kelahirannya. Ibunya, Aminah, wafat saat beliau berusia enam tahun. Beliau kemudian diasuh oleh kakeknya, Abdul Muthalib, dan setelah kakeknya wafat, oleh pamannya, Abu Thalib. Sejak muda, beliau dikenal dengan akhlaknya yang mulia, kejujurannya, dan integritasnya, sehingga mendapat gelar <strong>Al-Amin (Yang Dapat Dipercaya)</strong>. Beliau menikah dengan Khadijah binti Khuwailid, seorang saudagar wanita yang mulia, pada usia 25 tahun.</p>
+
+                <h4>2. Kenabian dan Dakwah di Mekah (610 - 622 M)</h4>
+                <p>Pada usia 40 tahun, saat menyendiri (bertahannuts) di Gua Hira, beliau didatangi Malaikat Jibril yang membawa wahyu pertama, yaitu Surat Al-Alaq ayat 1-5. Ini menandai dimulainya misi kenabian beliau. Dakwah di Mekah berlangsung selama 13 tahun dan terbagi menjadi dua fase:</p>
+                <ul>
+                    <li><strong>Fase Sembunyi-sembunyi:</strong> Selama tiga tahun, dakwah dilakukan kepada lingkaran terdekat. Orang-orang pertama yang masuk Islam (Assabiqunal Awwalun) antara lain Khadijah, Abu Bakar, Ali bin Abi Thalib, dan Zaid bin Haritsah.</li>
+                    <li><strong>Fase Terang-terangan:</strong> Setelah turun perintah Allah, Nabi mulai berdakwah secara terbuka. Fase ini dipenuhi tantangan berat, penolakan, intimidasi, dan penganiayaan dari kaum kafir Quraisy. Puncak penderitaan terjadi saat pemboikotan terhadap Bani Hasyim dan wafatnya Khadijah serta Abu Thalib pada "Tahun Kesedihan" ('Amul Huzn). Di tengah kesulitan ini, Allah menghibur beliau dengan peristiwa agung <strong>Isra' Mi'raj</strong>.</li>
+                </ul>
+
+                <h4>3. Hijrah dan Pembentukan Negara Madinah (622 M)</h4>
+                <p>Akibat meningkatnya penindasan dan adanya rencana pembunuhan, Allah memerintahkan Nabi Muhammad SAW dan kaum Muslimin untuk berhijrah ke Yatsrib. Peristiwa hijrah yang penuh bahaya ini menjadi titik balik sejarah Islam dan ditetapkan sebagai awal kalender Hijriyah. Setibanya di sana, Yatsrib diubah namanya menjadi <strong>Madinah Al-Munawwarah (Kota yang Bercahaya)</strong>. Langkah-langkah strategis yang beliau lakukan antara lain:</p>
+                <ul>
+                    <li>Membangun Masjid Nabawi sebagai pusat ibadah dan pemerintahan.</li>
+                    <li>Mempersaudarakan kaum Muhajirin (pendatang dari Mekah) dan Anshar (penduduk asli Madinah).</li>
+                    <li>Menyusun <strong>Piagam Madinah</strong>, sebuah konstitusi tertulis pertama di dunia yang mengatur kehidupan masyarakat yang majemuk berdasarkan keadilan dan kesetaraan hak.</li>
+                </ul>
+
+                <h4>4. Perjuangan Mempertahankan Islam (624 - 630 M)</h4>
+                <p>Fase Madinah diwarnai oleh serangkaian peperangan (ghazwah) yang bertujuan untuk mempertahankan diri dan melindungi komunitas Muslim yang baru lahir. Di antaranya adalah:</p>
+                <ul>
+                    <li><strong>Perang Badar (2 H):</strong> Kemenangan gemilang kaum Muslimin melawan pasukan Quraisy yang jauh lebih besar.</li>
+                    <li><strong>Perang Uhud (3 H):</strong> Memberikan pelajaran berharga tentang pentingnya ketaatan pada pemimpin.</li>
+                    <li><strong>Perang Khandaq (5 H):</strong> Menunjukkan kejeniusan strategi bertahan dengan membuat parit.</li>
+                </ul>
+                <p>Pada tahun ke-6 Hijriyah, ditandatangani <strong>Perjanjian Hudaibiyah</strong> dengan kaum Quraisy. Meskipun tampak merugikan, perjanjian ini merupakan kemenangan diplomatik yang membuka jalan bagi dakwah Islam secara lebih luas.</p>
+
+                <h4>5. Fathu Makkah dan Penyempurnaan Risalah (630 - 632 M)</h4>
+                <p>Ketika kaum Quraisy melanggar Perjanjian Hudaibiyah, Nabi Muhammad SAW beserta 10.000 pasukan bergerak menuju Mekah. Peristiwa <strong>Fathu Makkah (Penaklukan Mekah)</strong> ini terjadi secara damai tanpa pertumpahan darah. Beliau menunjukkan kemuliaan akhlak dengan memaafkan seluruh musuhnya yang dulu menganiayanya. Ka'bah dibersihkan dari berhala, dan Islam tersebar pesat di seluruh Jazirah Arab.</p>
+                <p>Pada tahun ke-10 Hijriyah, beliau menunaikan <strong>Haji Wada' (Haji Perpisahan)</strong> dan menyampaikan khutbah terakhir yang monumental, berisi pesan-pesan universal tentang tauhid, persaudaraan, keadilan, dan hak asasi manusia. Tak lama setelah itu, beliau jatuh sakit dan wafat di Madinah pada usia 63 tahun, meninggalkan warisan abadi bagi umat manusia: Al-Qur'an dan Sunnah.</p>
+
+            </section>
+        </main>
+    </div>
+
+
+    <div id="project2" class="container project-page">
+        <main>
+            <button class="button button-close" onclick="showPage('portfolio-page')">← Kembali ke Portofolio</button>
+            <h2>Kajian: Etika Bisnis dalam Kehidupan Sehari-hari: Menjauhi Praktik Riba</h2>
+            <section class="section">
+                <h3>Pengertian Riba</h3>
+                <p>Riba adalah tambahan atau kelebihan yang disyaratkan dalam transaksi pinjam-meminjam atau jual-beli yang bertentangan dengan prinsip keadilan dalam Islam. Secara bahasa, riba berarti "tambahan" atau "kelebihan". Sedangkan secara istilah (syar’i), riba adalah setiap tambahan yang diperoleh tanpa adanya pertukaran yang seimbang atau kompensasi yang dibenarkan secara syariat.</p>
+                <h4>Jenis-Jenis Riba</h4>
+                <ul>
+                    <li><b>Riba Fadhl (Riba dalam pertukaran barang sejenis):</b> Terjadi jika dua barang sejenis dipertukarkan dengan takaran atau berat yang berbeda.</li>
+                    <li><b>Riba Nasiah (Riba karena penundaan waktu):</b> Tambahan karena penundaan pembayaran hutang. Ini adalah jenis riba paling umum dalam pinjaman.</li>
+                    <li><b>Riba Qardh (Riba dalam pinjaman):</b> Setiap keuntungan yang disyaratkan oleh pemberi pinjaman kepada peminjam.</li>
+                    <li><b>Riba Yad (Riba karena penundaan serah terima):</b> Terjadi dalam transaksi jual beli di mana salah satu pihak menunda penyerahan objek akad.</li>
+                </ul>
+            </section>
+            <section class="section">
+                <h3>Contoh Riba dan Dampaknya</h3>
+                <h4>Contoh Riba dalam Kehidupan Sehari-hari</h4>
+                <ul>
+                    <li>Meminjam uang ke rentenir dengan bunga.</li>
+                    <li>Membeli barang dengan cicilan berbunga melalui kartu kredit konvensional.</li>
+                    <li>Menerima bunga dari tabungan atau deposito di bank konvensional.</li>
+                    <li>Jual beli emas secara tidak tunai (dengan pembayaran ditangguhkan).</li>
+                </ul>
+                <h4>Dampak Riba dalam Etika Bisnis</h4>
+                <ul>
+                    <li>Menghilangkan keberkahan usaha.</li>
+                    <li>Menciptakan ketidakadilan dan eksploitasi ekonomi.</li>
+                    <li>Memperbesar kesenjangan sosial.</li>
+                    <li>Merusak kepercayaan dan nilai amanah dalam bisnis.</li>
+                    <li>Menjerat individu dan bisnis dalam lingkaran utang.</li>
+                </ul>
+                <h3>Referensi</h3>
+                <ol style="list-style-type: decimal; padding-left: 20px;">
+                    <li>Al-Qur’an Surat Al-Baqarah ayat 275-279</li>
+                    <li>Hadis Riwayat Muslim tentang larangan riba</li>
+                    <li>Antonio, Muhammad Syafi’i. <em>Bank Syariah: Dari Teori ke Praktik</em>. Gema Insani, 2001.</li>
+                    <li>Ascarya. <em>Akad dan Produk Bank Syariah</em>. Bank Indonesia, 2007.</li>
+                    <li>Otoritas Jasa Keuangan (OJK). "Pengertian dan Bahaya Riba". <a href="https://www.ojk.go.id" target="_blank">www.ojk.go.id</a></li>
+                    <li>Dewan Syariah Nasional MUI. <em>Fatwa Tentang Riba</em>. <a href="https://www.dsnmui.or.id" target="_blank">www.dsnmui.or.id</a></li>
+                </ol>
+                <h3>Studi Kasus: Praktik Bisnis yang Tidak Sesuai dengan Etika Islami</h3>
+                <div class="case-study-box">
+                    <h4>Kasus: Dugaan Kartel Bunga Tinggi oleh 97 Perusahaan Pinjaman Online</h4>
+                    <img src="Screenshot (98).png" alt="Studi Kasus Pinjaman Online" class="case-study-image">
+                    <p>Pada Mei 2025, Komisi Pengawas Persaingan Usaha (KPPU) mengungkap dugaan pelanggaran oleh 97 penyelenggara layanan pinjaman online (pinjol) yang diduga menetapkan plafon bunga harian tinggi secara bersama-sama melalui kesepakatan internal. Praktik ini diduga melanggar Pasal 5 Undang-Undang Nomor 5 Tahun 1999 tentang Larangan Praktik Monopoli dan Persaingan Usaha Tidak Sehat.</p>
+                    <hr>
+                    <h4>Opini Pribadi</h4>
+                    <p>Menurut pandangan saya, praktik penetapan bunga tinggi secara kolektif oleh perusahaan pinjol sangat bertentangan dengan prinsip keadilan dan tolong-menolong dalam Islam. Dalam ajaran Islam, transaksi keuangan seharusnya bebas dari riba dan tidak memberatkan salah satu pihak. Praktik seperti ini tidak hanya merugikan konsumen secara finansial tetapi juga menciptakan ketimpangan sosial dan ekonomi.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="project3" class="container project-page">
+        <main>
+            <button class="button button-close" onclick="showPage('portfolio-page')">← Kembali ke Portofolio</button>
+            <h2>Proyek: Pemasaran Islami</h2>
+            <section class="section">
+                <h3>Pengertian Bisnis Kontemporer Islami</h3>
+                <p>Bisnis kontemporer Islami adalah sebuah pendekatan dalam dunia usaha yang mengintegrasikan prinsip-prinsip ajaran Islam dengan praktik bisnis modern di tengah arus globalisasi dan kemajuan teknologi. Lebih dari sekadar mencari keuntungan materi, model bisnis ini bertujuan untuk meraih falah—kesuksesan hakiki yang mencakup kesejahteraan di dunia dan kebahagiaan di akhirat—dengan menjadikan setiap aktivitas bisnis sebagai wujud ibadah kepada Allah SWT.</p>
+            </section>
+            <section class="section">
+                <h3>Dasar Regulasi Bisnis (Fiqh Bisnis Kontemporer)</h3>
+                <p>Dasar regulasi yang menopang bisnis kontemporer Islami, atau yang dikenal sebagai Fiqh Muamalah Kontemporer, merupakan perpaduan antara sumber-sumber hukum Islam yang fundamental dengan kerangka hukum positif dan regulasi teknis yang berlaku di Indonesia. Landasan ini memastikan bahwa setiap aktivitas bisnis tidak hanya sah secara hukum negara, tetapi juga selaras dengan prinsip-prinsip syariah.</p>
+            </section>
+            <section class="section">
+                <h3>Tujuan Bisnis dalam Islam</h3>
+                <p>Tujuan bisnis dalam Islam tidak hanya berhenti pada pencapaian keuntungan materi, tetapi memiliki visi yang jauh lebih luas dan mendalam. Tujuan utamanya adalah untuk meraih Falah (فلاح), yaitu sebuah konsep kesuksesan holistik yang mencakup kesejahteraan di dunia dan kebahagiaan di akhirat.</p>
+            </section>
+            <section class="section">
+                <h3>Aplikasi E-Commerce dalam Bisnis Islami</h3>
+                <p>Aplikasi E-Commerce dalam konteks Bisnis Islami bukan sekadar platform digital yang menjual produk-produk halal. Ia adalah sebuah ekosistem muamalah (transaksi) online yang keseluruhan prosesnya, mulai dari kurasi produk, akad jual beli, sistem pembayaran, hingga pemasaran, dirancang untuk patuh pada prinsip-prinsip syariah.</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="project4" class="container project-page">
+        <main>
+            <button class="button button-close" onclick="showPage('portfolio-page')">← Kembali ke Portofolio</button>
+            <h2>Mengenal Lembaga Keuangan Syariah: Perbankan dan Perbedaannya dengan Konvensional</h2>
+            <section class="section">
+                <h3>Pendahuluan</h3>
+                <p>Lembaga Keuangan Syariah (LKS) adalah badan usaha yang menghimpun dan menyalurkan dana masyarakat dengan menggunakan prinsip-prinsip hukum Islam (Syariah). Berbeda dengan lembaga konvensional, LKS beroperasi tanpa bunga (riba), spekulasi (maysir), dan ketidakjelasan (gharar). Fokus utama LKS, khususnya perbankan syariah, adalah mendorong kegiatan ekonomi di sektor riil melalui sistem kemitraan dan perdagangan yang adil.</p>
+            </section>
+            <section class="section">
+                <h3>Fungsi dan Produk Perbankan Syariah</h3>
+                <p>Secara umum, bank syariah memiliki fungsi yang sama dengan bank konvensional, yaitu sebagai lembaga intermediasi. Namun, produk dan akad yang digunakan sangat berbeda. Dasar hukum utamanya di Indonesia adalah UU No. 21 Tahun 2008 tentang Perbankan Syariah.</p>
+                <h4>1. Fungsi Penghimpunan Dana (Funding)</h4>
+                <ul>
+                    <li><strong>Akad Wadiah (Titipan):</strong> Nasabah menitipkan dana dan bank menjamin keamanannya. Bank boleh memberikan bonus sukarela (hibah) kepada nasabah, tetapi tidak dijanjikan di awal. Contoh: Giro Wadiah.</li>
+                    <li><strong>Akad Mudharabah (Bagi Hasil):</strong> Nasabah bertindak sebagai pemilik dana (shahibul mal) dan bank sebagai pengelola (mudharib). Keuntungan dari pengelolaan dana akan dibagi hasil sesuai nisbah (porsi) yang disepakati di awal. Jika rugi, kerugian ditanggung oleh pemilik dana. Contoh: Tabungan Mudharabah, Deposito Mudharabah.</li>
+                </ul>
+                <h4>2. Fungsi Penyaluran Dana (Financing)</h4>
+                <ul>
+                    <li><strong>Akad Murabahah (Jual Beli):</strong> Bank membelikan barang yang dibutuhkan nasabah (misal: mobil), kemudian menjualnya kepada nasabah dengan harga yang telah ditambah margin keuntungan yang disepakati. Nasabah membayar secara cicilan. Ini adalah akad paling umum untuk pembiayaan konsumtif.</li>
+                    <li><strong>Akad Musyarakah (Kemitraan):</strong> Bank dan nasabah sama-sama menyertakan modal untuk sebuah proyek atau usaha. Keuntungan dibagi sesuai kesepakatan, dan kerugian ditanggung bersama sesuai porsi modal.</li>
+                    <li><strong>Akad Ijarah (Sewa) & IMBT (Sewa Beli):</strong> Bank menyewakan suatu aset (misal: rumah) kepada nasabah. Pada akhir masa sewa dalam skema IMBT (Ijarah Muntahiyah bit Tamlik), kepemilikan aset dapat berpindah kepada nasabah.</li>
+                </ul>
+            </section>
+            <section class="section">
+                <h3>Tabel Perbedaan Perbankan Syariah vs Konvensional</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Perbankan Syariah</th>
+                            <th>Perbankan Konvensional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Dasar Operasional</strong></td><td>Prinsip Syariah Islam (Al-Qur'an & Hadis), bebas riba.</td><td>Prinsip ekonomi konvensional dengan instrumen utama bunga.</td></tr>
+                        <tr><td><strong>Hubungan Nasabah</strong></td><td>Kemitraan (penjual-pembeli, investor-pengelola).</td><td>Kreditur dan Debitur (pemberi pinjaman dan peminjam).</td></tr>
+                        <tr><td><strong>Sumber Keuntungan</strong></td><td>Margin keuntungan jual beli, bagi hasil, dan biaya sewa (fee).</td><td>Bunga pinjaman (kredit) dan selisih bunga simpanan.</td></tr>
+                        <tr><td><strong>Pengelolaan Risiko</strong></td><td>Risiko dibagi bersama antara bank dan nasabah (terutama dalam akad bagi hasil).</td><td>Risiko cenderung dilimpahkan kepada peminjam (debitur).</td></tr>
+                        <tr><td><strong>Orientasi</strong></td><td>Kemaslahatan umat (Falah), profit, dan keberkahan. Terikat pada sektor riil.</td><td>Profit (keuntungan) semata.</td></tr>
+                        <tr><td><strong>Pengawasan</strong></td><td>Diawasi oleh OJK dan Dewan Pengawas Syariah (DPS) internal.</td><td>Hanya diawasi oleh OJK dan regulator keuangan negara.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="section">
+                <h3>Studi Kasus: Tantangan pada Lembaga Keuangan Syariah Non-Bank</h3>
+                <div class="case-study-box">
+                    <h4>Kasus: Dugaan Penipuan dan Gagal Bayar oleh Koperasi Syariah (BMT)</h4>
+                    <img src="Screenshot (80).png" alt="Ilustrasi Kantor Lembaga Keuangan Syariah" class="case-study-image">
+                    <p>
+                        Kasus gagal bayar yang menimpa beberapa Koperasi Simpan Pinjam dan Pembiayaan Syariah (KSPPS), atau yang sering dikenal sebagai Baitul Maal wat Tamwil (BMT), menjadi sorotan di berbagai media. Salah satu contohnya adalah kasus yang menimpa KSPPS BMT Insan Cita Usaha Mulia Indonesia (ICUMI) di Cirebon, di mana ribuan anggota tidak dapat menarik dana simpanan mereka. Pihak berwenang menyelidiki adanya dugaan penyalahgunaan dana oleh pengurus untuk kepentingan pribadi, yang menyebabkan kerugian besar bagi anggota yang mayoritas adalah masyarakat kecil dan pelaku UMKM.
+                        <br>
+                        <em>(Sumber: Diadaptasi dari berbagai berita media nasional seperti Detikcom dan CNN Indonesia mengenai kasus gagal bayar koperasi syariah).</em>
+                    </p>
+                    <hr>
+                    <h4>Opini: Bagaimana Semestinya LKS Non-Bank Beroperasi?</h4>
+                    <blockquote>
+                        Kasus seperti ini adalah pukulan telak bagi kepercayaan masyarakat terhadap lembaga keuangan syariah. Ini bukan sekadar masalah finansial, tetapi masalah pengkhianatan terhadap amanah. Seharusnya, sebuah lembaga yang membawa label "syariah" beroperasi dengan standar etika tertinggi.
+                    </blockquote>
+                    <ul>
+                        <li><strong>Memperkuat Prinsip Amanah:</strong> Pengurus LKS, terutama BMT, adalah pemegang amanah dari dana anggota. Setiap rupiah harus dikelola dengan profesionalisme dan integritas tertinggi.</li>
+                        <li><strong>Tata Kelola yang Baik (Good Corporate Governance):</strong> Harus ada pemisahan yang jelas antara fungsi pengurus, pengawas, dan anggota. Laporan keuangan harus transparan dan rutin diaudit.</li>
+                        <li><strong>Peran Aktif Dewan Pengawas Syariah (DPS):</strong> DPS tidak boleh hanya menjadi formalitas. Mereka harus mengawasi kehalalan akad serta memastikan operasional berjalan adil dan tidak merugikan anggota.</li>
+                        <li><strong>Perlindungan Anggota:</strong> Mekanisme perlindungan anggota harus diperkuat melalui pengawasan internal dan eksternal yang ketat dari regulator pemerintah.</li>
+                    </ul>
+                    <p>Pada akhirnya, LKS non-bank seperti BMT adalah tulang punggung ekonomi umat di tingkat akar rumput. Agar dapat berfungsi sesuai tujuannya, pilar <strong>amanah, transparansi, dan pengawasan yang ketat</strong> adalah harga mati yang tidak bisa ditawar.</p>
+                </div>
+            </section>
+            <section class="section">
+                <h3>Kesimpulan</h3>
+                <p>Perbedaan mendasar antara perbankan syariah dan konvensional terletak pada filosofi dan sistem operasionalnya. Perbankan syariah menawarkan sebuah paradigma di mana transaksi keuangan harus terikat pada etika, keadilan, dan kegiatan ekonomi yang nyata (sektor riil). Kehadiran Dewan Pengawas Syariah (DPS) di setiap LKS menjadi jaminan bahwa seluruh operasional tetap berjalan sesuai koridor syariah, memberikan alternatif sistem keuangan yang lebih adil dan berorientasi pada kemaslahatan bersama.</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="project5" class="container project-page">
+        <main>
+            <button class="button button-close" onclick="showPage('portfolio-page')">← Kembali ke Portofolio</button>
+            <h2>Praktik Muamalah dalam Kehidupan Modern</h2>
+            <section class="section">
+                <h3>Apa itu Muamalah?</h3>
+                <p>Muamalah adalah segala aturan dalam Islam yang mengatur hubungan dan interaksi antar manusia, terutama dalam hal perniagaan, keuangan, dan transaksi. Prinsip utamanya adalah keadilan, transparansi, dan kerelaan kedua belah pihak. Kaidah dasar yang paling terkenal adalah:</p>
+                <blockquote>"Pada dasarnya, semua bentuk muamalah itu diperbolehkan (mubah), kecuali ada dalil yang mengharamkannya."</blockquote>
+                <p>Ini memberikan fleksibilitas luas bagi umat Islam untuk berinovasi dalam bisnis dan keuangan selama tidak melanggar larangan-larangan inti seperti riba, gharar, dan maysir.</p>
+            </section>
+
+            <section class="section">
+                <h3>Ringkasan Praktik Muamalah Modern</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jenis Akad</th>
+                            <th>Deskripsi Singkat</th>
+                            <th>Contoh Praktik Modern</th>
+                            <th>Contoh Video Penjelasan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Jual Beli (Al-Bai')</strong></td>
+                            <td>Pertukaran harta dengan harta berdasarkan kerelaan. Rukunnya: penjual, pembeli, barang, harga, dan ijab qabul.</td>
+                            <td>Transaksi di e-commerce, belanja di supermarket, jual beli saham syariah.</td>
+                            <td><a href="https://youtu.be/cdE_efLJC1g?si=dSvad8uyzo1Jo9PY" target="_blank">Video Jual Beli Islami</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sewa-Menyewa (Ijarah)</strong></td>
+                            <td>Pemindahan hak guna (manfaat) atas aset dengan imbalan biaya sewa (ujrah), tanpa pemindahan kepemilikan.</td>
+                            <td>Sewa apartemen, rental mobil, KPR dengan skema IMBT (Ijarah Muntahiyah bit Tamlik).</td>
+                            <td><a href="https://youtu.be/cdE_efLJC1g?si=dSvad8uyzo1Jo9PY" target="_blank">Video Konsep Ijarah</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kemitraan (Syirkah)</strong></td>
+                            <td>Kerja sama antara dua pihak atau lebih untuk suatu usaha, dengan prinsip berbagi untung dan rugi.</td>
+                            <td>Mendirikan startup bersama teman dengan modal patungan (Musyarakah), investasi di proyek properti syariah.</td>
+                            <td><a href="https://youtu.be/cdE_efLJC1g?si=dSvad8uyzo1Jo9PY" target="_blank">Video Akad Syirkah</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gadai (Rahn)</strong></td>
+                            <td>Menjadikan aset sebagai jaminan (marhun) atas utang untuk memberikan kepercayaan kepada pemberi utang.</td>
+                            <td>Gadai emas di Pegadaian Syariah atau bank syariah untuk mendapatkan dana tunai. Biaya yang dikenakan adalah biaya penitipan.</td>
+                            <td><a href="https://youtu.be/cdE_efLJC1g?si=dSvad8uyzo1Jo9PY" target="_blank">Video Gadai Syariah</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.project-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById('portfolio-page').style.display = 'block';
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.section, .project-card').forEach(el => {
+                scrollObserver.observe(el);
+            });
+        });
+        function showPage(pageId) {
+            document.querySelectorAll('.container').forEach(page => {
+                page.style.display = 'none';
+            });
+            const newPage = document.getElementById(pageId);
+            if (newPage) {
+                newPage.style.display = 'block';
+                window.scrollTo(0, 0);
+            } else {
+                console.error("Kesalahan: Halaman dengan ID '" + pageId + "' tidak ditemukan.");
+                document.getElementById('portfolio-page').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
